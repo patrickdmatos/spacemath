@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Moedas
+  - Armadilhas
+  - Portais
+  - Baus
+  - CheckPoint
+  - Armadilha
+  - PlataformasAndantes
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - ground
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 1185051521
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: beforeground
+    uniqueID: 1621396651
+    locked: 0
+  - name: enemys
+    uniqueID: 1194223829
+    locked: 0
+  - name: secret_way
+    uniqueID: 1747795499
+    locked: 0
+  - name: Player
+    uniqueID: 2474800065
+    locked: 0

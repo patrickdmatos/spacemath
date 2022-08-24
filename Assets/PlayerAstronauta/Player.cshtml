@@ -1,0 +1,139 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Player : MonoBehaviour {
+	
+	public int vidas;
+	public int moedas;
+	public Text TextMoedas;
+	
+	public AudioSource son_pegandomoedas;
+	public AudioSource son_pulando;
+	public AudioSource son_caminhando;
+	public AudioSource son_morrendo;
+		
+	public float speed = 10f;
+	public float jumpForce = 200f;
+	public Transform groundCheck;
+	public LayerMask whatIsGround;
+	
+	[SerializeField] private Transform player1;
+	[SerializeField] private Transform respawnPoint;
+	
+	bool isJumping = false;
+	bool isOnFloor = false;
+	private Rigidbody2D body;
+	SpriteRenderer sprite;
+	Animator anim;
+	
+	
+    // Start is called before the first frame update
+    void Start()
+    {
+    	body = GetComponent <Rigidbody2D> ();
+    	sprite = GetComponent <SpriteRenderer> ();
+    	anim = GetComponent <Animator> ();
+    	
+    }
+
+    // Update is called once per frame
+    void Update()
+    {	
+    	
+    	isOnFloor = Physics2D.Linecast (transform.position, groundCheck.position, whatIsGround);
+    	if (Input.GetButtonDown ("Jump") && isOnFloor == true) {
+    	    isJumping = true;
+    	    son_pulando.Play();
+    	}
+    	PlayerAnimation();
+    	TextMoedas.text = moedas.ToString();
+    }
+    
+    void FixedUpdate() {
+    	
+    	float move = Input.GetAxis("Horizontal");
+    	body.velocity = new Vector2 (move * speed, body.velocity.y);
+    	if ((move > 0 && sprite.flipX == true) || (move < 0 && sprite.flipX == false)) {
+    		flip();
+    	}
+    	
+    	if (isJumping) {
+    		body.AddForce(new Vector2 (0f, jumpForce));
+    		isJumping = false;	
+    	}
+    }
+    
+    void OnTriggerEnter2D(Collider2D collision2D) {
+    	
+    	Debug.Log("Colidiu c a tag "+collision2D.gameObject.tag);
+    	if (collision2D.gameObject.CompareTag("Moedas")) {
+    		Destroy(collision2D.gameObject);
+    		Debug.Log("pegou uma moeda");
+    		son_pegandomoedas.Play();
+    		moedas++;
+    	} 
+    	
+    	if (collision2D.gameObject.CompareTag("Armadilhas")) {
+    		Debug.Log("perdeu uma vida e voltou pro spawn");
+    		player1.transform.position = respawnPoint.transform.position;
+    		son_morrendo.Play();
+    	}
+    	
+    	if (collision2D.gameObject.CompareTag("Baus")) {
+    		Debug.Log("Abriu a pergunta de matematica");
+    		
+    	}
+    	
+    	if (collision2D.gameObject.CompareTag("Portais")) {
+    		if (collision2D.gameObject.name == ("Portal0"))
+    		{ 
+    				Debug.Log("Pergunta se quer ir pro nivel 0");
+    				UnityEngine.SceneManagement.SceneManager.LoadScene("fase0Portais");	
+    		}
+    		if (collision2D.gameObject.name == ("Portal1"))
+    		{ Debug.Log("Pergunta se quer ir pro nivel 1");
+    		}
+    		if (collision2D.gameObject.name == ("Portal2"))
+    		{ Debug.Log("Pergunta se quer ir pro nivel 2");
+    		}
+    		if (collision2D.gameObject.name == ("Portal3"))
+    		{ Debug.Log("Pergunta se quer ir pro nivel 3");
+    		}
+    		if (collision2D.gameObject.name == ("Portal4"))
+    		{ Debug.Log("Pergunta se quer ir pro nivel 4");
+    		}
+    		if (collision2D.gameObject.name == ("Portal5"))
+    		{ Debug.Log("Pergunta se quer ir pro nivel 5");
+    		}
+    		if (collision2D.gameObject.name == ("Portal6"))
+    		{ Debug.Log("Pergunta se quer ir pro nivel 6");
+    		}
+    		if (collision2D.gameObject.name == ("Portal7"))
+    		{ Debug.Log("Pergunta se quer ir pro nivel 7");
+    		}
+    		if (collision2D.gameObject.name == ("Portal8"))
+    		{ Debug.Log("Pergunta se quer ir pro nivel 8");
+    		}
+    	}
+    	
+    }
+    
+    
+    
+    void flip() {
+    	sprite.flipX = !sprite.flipX;
+    }
+    
+    void PlayerAnimation() {
+    	if (body.velocity.x == 0 && body.velocity.y == 0 && isOnFloor == true) {
+    		anim.Play ("idle");
+    	} else if (body.velocity.x != 0 && isOnFloor == true) {
+    		anim.Play("walk");
+    		son_caminhando.Play();
+    	} else if (body.velocity.y != 0 && isOnFloor == false) {
+    		anim.Play("jump");
+    	}
+    }
+}

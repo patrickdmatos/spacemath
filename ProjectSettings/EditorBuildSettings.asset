@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 4a62026c71f1c524ebbdb850f365ae78
+  - enabled: 1
+    path: "Assets/Scenes/Cena-Come\xE7o.unity"
+    guid: 99ea7013073069541a2f70bb15ae6ca8
+  - enabled: 1
+    path: Assets/Scenes/fase0Portais.unity
+    guid: c29a8fd060e7e2d498685303fd781f92
+  - enabled: 1
+    path: Assets/Scenes/fase1.unity
+    guid: d9f804223c923c3459785047965fd342
+  - enabled: 0
+    path: Assets/Scenes/fase3.unity
+    guid: 904ad2037a991b84c8f4be8103b5b763
+  - enabled: 0
+    path: Assets/Scenes/fase4.unity
+    guid: e74b05836a8a7a4429d0cfd677d50bd3
+  - enabled: 0
+    path: Assets/Scenes/fase6.unity
+    guid: d4607afdd97b0134d827a1837ee25414
+  - enabled: 0
+    path: Assets/Scenes/fase7.unity
+    guid: 64322e2d1203243418757c116f39c29b
+  m_configObjects: {}
